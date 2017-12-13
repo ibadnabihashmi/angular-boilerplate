@@ -1,3 +1,15 @@
-<p>
-  home works!
-</p>
+<div>
+  <div style="text-align: center;">
+    <div *ngFor='let task of todos'>
+        <p>{{task.title}}</p>
+        <a type="button" routerLink="/details/{{task.id}}">view</a>
+        <button (click)='deleteTodo(task.id)'>delete</button>
+        <hr> 
+    </div>
+    <hr>
+    <input [(ngModel)]='newTodo.title' >
+    <input [(ngModel)]='newTodo.description' >
+    <input [(ngModel)]='newTodo.status' >
+    <button (click)='saveNewTodo()'>save</button>
+  </div>
+</div>

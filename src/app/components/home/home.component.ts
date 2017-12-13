@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Todo } from '../../models/todo.model';
+import { TodoService } from '../../services/todo.service';
+import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import { State } from '../../store/state/app.state';
+import { FetchTodos } from '../../store/actions/todo.actions';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +13,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  todos: Observable<Todo[]>;
 
-  ngOnInit() {
+  @Input() newTodo: Todo;
+
+  constructor(
+    private store: Store<State>
+  ) {
+    this.todos = this.store.select(state => state.todos);
+    this.newTodo = new Todo('4', '' , '', '');
   }
 
+  ngOnInit() {
+    this.store.dispatch(new FetchTodos());
+  }
+
+  deleteTodo(id: string) {
+    console.log(id);
+  }
+
+  saveNewTodo() {
+    console.log(this.newTodo);
+  }
 }
