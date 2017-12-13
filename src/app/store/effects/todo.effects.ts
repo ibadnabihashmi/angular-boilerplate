@@ -3,8 +3,10 @@ import { Action } from '@ngrx/store';
 import { Effect, Actions, toPayload } from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 import { TodoService } from '../../services/todo.service';
-import { FETCH_TODOS } from '../actions/todo.actions';
+import { FETCH_TODOS, FETCH_TODOS_DONE, FetchTodosDone } from '../actions/todo.actions';
 import { query } from '@angular/core/src/animation/dsl';
+import { map } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators/switchMap';
 
 @Injectable()
 export class TodoEffects {
@@ -16,9 +18,15 @@ export class TodoEffects {
     @Effect()
     fetchTodos$: Observable<Action> = this.actions$
     .ofType(FETCH_TODOS)
-    .map(toPayload)
-    .switchMap(query => {
-        return this.todoService.getTodos()
-        .map(results => new)
-    })
+    .pipe(
+        map(toPayload),
+        switchMap(query => {
+            return this.todoService.getTodos()
+            .pipe(
+                map((results) => {
+                    return new FetchTodosDone(results)
+                })
+            )
+        })
+    );
 }

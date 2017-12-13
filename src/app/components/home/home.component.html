@@ -1,10 +1,12 @@
 <div>
   <div style="text-align: center;">
-    <div *ngFor='let task of todos'>
-        <p>{{task.title}}</p>
-        <a type="button" routerLink="/details/{{task.id}}">view</a>
-        <button (click)='deleteTodo(task.id)'>delete</button>
-        <hr> 
+    <div *ngIf='todos.length'>
+        <div *ngFor='let task of todos'>
+            <p>{{task.title}}</p>
+            <a type="button" routerLink="/details/{{task.id}}">view</a>
+            <button (click)='deleteTodo(task.id)'>delete</button>
+            <hr> 
+        </div>
     </div>
     <hr>
     <input [(ngModel)]='newTodo.title' >

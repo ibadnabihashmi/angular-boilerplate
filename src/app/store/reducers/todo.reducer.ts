@@ -5,7 +5,16 @@ import * as TodoActions from '../actions/todo.actions';
 export function todoReducer(state = initialState, action: TodoActions.Actions) {
     switch (action.type) {
         case TodoActions.FETCH_TODOS: {
-            return state;
+            return {
+                ...state
+            };
+        }
+
+        case TodoActions.FETCH_TODOS_DONE: {
+            return {
+                ...state,
+                todos: action.todos
+            };
         }
 
         case TodoActions.ADD_TODO: {

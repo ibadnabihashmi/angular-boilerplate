@@ -6,9 +6,15 @@ export const DELETE_TODO = '[TODO] delete todo';
 export const EDIT_TODO = '[TODO] edit todo';
 export const VIEW_TODO = '[TODO] view todo';
 export const FETCH_TODOS = '[TODO] fetch todos';
+export const FETCH_TODOS_DONE = '[TODO] fetch todos done';
 
 export class FetchTodos implements Action {
     readonly type = FETCH_TODOS;
+}
+
+export class FetchTodosDone implements Action {
+    readonly type = FETCH_TODOS_DONE;
+    constructor(public todos: Todo[]) { }
 }
 
 export class AddTodo implements Action {
@@ -30,4 +36,4 @@ export class ViewTodo implements Action {
 }
 
 export type Actions = AddTodo | DeleteTodo | EditTodo | ViewTodo
-| FetchTodos;
+| FetchTodos | FetchTodosDone;
