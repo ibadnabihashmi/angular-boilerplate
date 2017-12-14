@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Todo } from '../../models/todo.model';
-import { TodoService } from '../../services/todo.service';
+import { Counter } from '../../models/counter.model';
+import { CounterService } from '../../services/counter.service';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { State } from '../../store/reducers/reducer';
-import { FetchTodos } from '../../store/actions/todo.actions';
+import { AppState } from '../../store/reducers/reducer';
+import * as CounterActions from '../../store/actions/counter.actions';
 
 @Component({
   selector: 'app-home',
@@ -13,29 +13,30 @@ import { FetchTodos } from '../../store/actions/todo.actions';
 })
 export class HomeComponent implements OnInit {
 
-  todos: Observable<Todo[]>;
-
-  @Input() newTodo: Todo;
+  counter$: Observable<number>;
 
   constructor(
-    private store: Store<State>
+    private store: Store<AppState>
   ) {
-    this.todos = this.store.select(state => state.todo.todos);
-    this.newTodo = new Todo('4', '' , '', '');
+    this.counter$ = store.select(state => state.counter.counter);
   }
 
   ngOnInit() {
     console.log("Initializing");
-    this.store.dispatch(new FetchTodos());
+    this.store.dispatch(new CounterActions.Initialize());
     console.log("Initialized");
-    console.log(this.todos);
+    console.log(this.counter$);
   }
 
-  deleteTodo(id: string) {
-    console.log(id);
+  increment() {
+    console.log("Incrementing");
+    this.store.dispatch(new CounterActions.Increment());
+    console.log(this.counter$);
   }
 
-  saveNewTodo() {
-    console.log(this.newTodo);
+  decrement() {
+    console.log("Decrementing");
+    this.store.dispatch(new CounterActions.Decrement());
+    console.log(this.counter$);
   }
 }

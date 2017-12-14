@@ -4,30 +4,28 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { RoutingModule } from './routing.module';
-import { TodoService } from './services/todo.service';
-import { TodoDetailsComponent } from './components/todo-details/todo-details.component';
+import { RoutingModule } from './routing/routing.module';
+import { CounterService } from './services/counter.service';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducer } from './store/reducers/reducer';
-import { TodoEffects } from './store/effects/todo.effects';
+import { CounterEffects } from './store/effects/counter.effects';
+import { AppStoreModule } from './store/app-store.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
-    TodoDetailsComponent
+    HomeComponent
   ],
   imports: [
     FormsModule,
     BrowserModule,
     RoutingModule,
     HttpClientModule,
-    StoreModule.forRoot(reducer),
-    EffectsModule.forRoot([TodoEffects])
+    AppStoreModule
   ],
-  providers: [TodoService],
+  providers: [CounterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

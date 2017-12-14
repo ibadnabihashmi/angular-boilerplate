@@ -1,11 +1,11 @@
-import { todoReducer } from './todo.reducer';
-import { State as _State } from '../state/app.state';
+import { counterReducer } from './counter.reducer';
+import { CounterState } from '../state/counter.state';
 import { ActionReducerMap } from '@ngrx/store';
 
-export interface State {
-    todo: _State;
+export interface AppState {
+    counter: CounterState;
 }
 
-export const reducer: ActionReducerMap<State> = {
-    todo: todoReducer
+export const reducer: ActionReducerMap<AppState> = {
+    counter: counterReducer
 };
