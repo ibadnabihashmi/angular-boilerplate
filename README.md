@@ -1,1 +1,2 @@
-TBD
+the project is open to contribution, i am accepting pull requests, thanks :)
+[![Build Status](https://travis-ci.org/ibadnabihashmi/angular-boilerplate.svg?branch=master)](https://travis-ci.org/ibadnabihashmi/angular-boilerplate)
