@@ -3,7 +3,7 @@ import { Counter } from '../../models/counter.model';
 import { CounterService } from '../../services/counter.service';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../store/reducers/reducer';
+import { CounterState } from '../../store/state/counter.state';
 import * as CounterActions from '../../store/actions/counter.actions';
 
 @Component({
@@ -16,27 +16,20 @@ export class HomeComponent implements OnInit {
   counter$: Observable<number>;
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<CounterState>
   ) {
-    this.counter$ = store.select(state => state.counter.counter);
+    this.counter$ = store.select<number>(state => state.counterReducer.counter);
   }
 
   ngOnInit() {
-    console.log("Initializing");
     this.store.dispatch(new CounterActions.Initialize());
-    console.log("Initialized");
-    console.log(this.counter$);
   }
 
   increment() {
-    console.log("Incrementing");
     this.store.dispatch(new CounterActions.Increment());
-    console.log(this.counter$);
   }
 
   decrement() {
-    console.log("Decrementing");
     this.store.dispatch(new CounterActions.Decrement());
-    console.log(this.counter$);
   }
 }

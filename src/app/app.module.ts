@@ -8,7 +8,6 @@ import { RoutingModule } from './routing/routing.module';
 import { CounterService } from './services/counter.service';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { reducer } from './store/reducers/reducer';
 import { CounterEffects } from './store/effects/counter.effects';
 import { AppStoreModule } from './store/app-store.module';
 

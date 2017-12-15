@@ -1,9 +1,13 @@
 import { Counter } from '../../models/counter.model';
 
 export interface CounterState {
-    counter: number;
+    counterReducer: {
+        counter: number;
+    };
 }
 
 export const initialState: CounterState = {
-    counter: 0
+    counterReducer: {
+        counter: 0
+    }
 };
