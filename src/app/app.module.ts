@@ -10,12 +10,14 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { CounterEffects } from './store/effects/counter.effects';
 import { AppStoreModule } from './store/app-store.module';
+import { AuthComponent } from './components/auth/auth.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    AuthComponent
   ],
   imports: [
     FormsModule,
